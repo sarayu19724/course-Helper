@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import  Grid from '@mui/material/Grid';
 import axios from 'axios';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
   const [values, setValues] = useState({
     name: '',
@@ -48,7 +49,7 @@ const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
       const token = localStorage.getItem("jwtToken");
       console.log("Updating course with values:", values); // Log values being sent
       const response = await axios.put(
-        `https://course-helper-woad.vercel.app/courses/${course.id}`,
+        `${API_URL}/courses/${course.id}`,
         values,
         {
           headers: {
