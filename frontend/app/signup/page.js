@@ -35,7 +35,7 @@ export default function SignUp() {
 
         try {
             // Call the signup API
-            const response = await axios.post("http://localhost:5000/auth/register", userDetails);
+            const response = await axios.post("https://course-helper-woad.vercel.app/auth/register", userDetails);
 
             if (response) {
                 alert("Signup successful! Redirecting to login...");
