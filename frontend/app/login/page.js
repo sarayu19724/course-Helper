@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Login() {
     const images = [
@@ -36,7 +37,7 @@ export default function Login() {
 
         try {
             // Make an API call to the login endpoint
-            const response = await axios.post("https://course-helper-woad.vercel.app/auth/login", loginDetails);
+            const response = await axios.post("${API_URL}/auth/login", loginDetails);
 
             if (response.status === 200) {
                 const { token } = response.data;
