@@ -31,7 +31,7 @@ const DialogForm = ({ open, onClose, onSuccess }) => {
     try {
       const token = localStorage.getItem("jwtToken");
       const response = await axios.post(
-        "http://localhost:5000/courses",
+        "https://course-helper-woad.vercel.app/courses",
         values,
         {
           headers: {
