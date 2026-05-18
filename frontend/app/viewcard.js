@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { Grid } from '@material-ui/core';
+import  Grid from '@mui/material/Grid';
 import axios from 'axios';
 
 const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
@@ -36,20 +36,20 @@ const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
   };
 
   const handleUpdate = async (event) => {
-    event.preventDefault(); 
-  
+    event.preventDefault();
+
     // Basic validation
     if (!values.name || !values.code || !values.credits) {
       alert("Please fill in all required fields.");
       return;
     }
-  
+
     try {
       const token = localStorage.getItem("jwtToken");
       console.log("Updating course with values:", values); // Log values being sent
       const response = await axios.put(
         `http://localhost:5000/courses/${course.id}`,
-        values, 
+        values,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -85,11 +85,11 @@ const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Edit Course</DialogTitle> 
+      <DialogTitle>Edit Course</DialogTitle>
       <DialogContent>
         <form>
           <Grid container spacing={4} style={{ marginTop: '10px' }}>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 label="Full Name*"
                 variant="outlined"
@@ -100,7 +100,7 @@ const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 label="Course Code*"
                 variant="outlined"
@@ -111,7 +111,7 @@ const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 label="Credits*"
                 variant="outlined"
@@ -122,7 +122,7 @@ const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 label="Description"
                 variant="outlined"
@@ -135,7 +135,7 @@ const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 label="Image URL"
                 variant="outlined"

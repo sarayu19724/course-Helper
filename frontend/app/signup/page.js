@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from "react";
-import { Grid, TextField } from "@material-ui/core";
+import { Grid, TextField } from "@mui/material";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
@@ -53,7 +53,7 @@ export default function SignUp() {
                 <h1 style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center', marginTop: '40px', color: 'black' }}>Sign Up</h1>
                 <form style={{ width: '400px', height: '500px', color: 'black' }} onSubmit={handleSubmit} noValidate>
                     <Grid container spacing={5}>
-                        <Grid item xs={12}>
+                        <Grid size={12}>
                             <TextField
                                 label="Username"
                                 variant="outlined"
@@ -65,7 +65,7 @@ export default function SignUp() {
                                 autoFocus
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid size={12}>
                             <TextField
                                 label="Password"
                                 variant="outlined"

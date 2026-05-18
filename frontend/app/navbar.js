@@ -13,7 +13,7 @@ import Avatar from "@mui/material";
 
 export default function Nav(){
   const router = useRouter();
-  
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -21,10 +21,10 @@ export default function Nav(){
       const token = localStorage.getItem("jwtToken");
       if (token) {
         setIsLoggedIn(true);
-        
+
       }
     };
-  
+
     checkUserLoggedIn();
   }, []);
 
@@ -33,28 +33,28 @@ export default function Nav(){
     setIsLoggedIn(false);
     alert("You have been logged out.");
   };
-    
+
     return(
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            
+
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Course Helper
             </Typography>
             {isLoggedIn ? (
-              
-              
+
+
               <Button color="inherit" onClick={handleLogOut}>
               Log Out
             </Button>
-            
+
           ) : (
             <Button color="inherit" onClick={() => router.push("/login")}>
               Log In
             </Button>
           )}
-          
+
 
           </Toolbar>
         </AppBar>

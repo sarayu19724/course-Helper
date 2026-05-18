@@ -9,11 +9,11 @@ import axios from 'axios';
 
 const DialogForm = ({ open, onClose, onSuccess }) => {
   const [values, setValues] = useState({
-    name:'',
-    code: '',
+    coursename: '',
+    coursecode: '',
     credits: '',
     description: '',
-    imageUrl: '',
+    image: '',
   });
 
   const handleChange = (e) => {
@@ -22,70 +22,61 @@ const DialogForm = ({ open, onClose, onSuccess }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    if (!values.name || !values.code || !values.credits) {
+
+    if (!values.coursename || !values.coursecode || !values.credits) {
       alert("Please fill in all required fields.");
       return;
     }
-  
-    
-   
-  
+
     try {
       const token = localStorage.getItem("jwtToken");
       const response = await axios.post(
         "http://localhost:5000/courses",
-        {values}, 
+        values,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      alert("Course updated successfully");
-      console.log("Course updated:", response.data);
-      onSuccess(response.data);
-      onClose(); 
+      alert("Course added successfully");
+      onSuccess(response.data.course);
+      onClose();
+      setValues({ coursename: '', coursecode: '', credits: '', description: '', image: '' });
     } catch (error) {
-      alert("Failed to update course. Please check your input and try again.");
-      if (error.response) {
-        console.error("Error updating course:", error.response.data);
-      } else if (error.request) {
-        console.error("Error updating course: No response received", error.request);
-      } else {
-        console.error("Error updating course:", error.message);
-      }
+      alert("Failed to add course. Please try again.");
+      console.error("Error:", error.response?.data || error.message);
     }
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add  Course</DialogTitle>
+      <DialogTitle>Add Course</DialogTitle>
       <DialogContent>
         <TextField
-          name="name"
+          name="coursename"
           label="Course Name"
           required
           fullWidth
           margin="normal"
           onChange={handleChange}
-          value={values.name}
+          value={values.coursename}
         />
         <TextField
-          name="code"
+          name="coursecode"
           label="Course Code"
           required
           fullWidth
           margin="normal"
           onChange={handleChange}
-          value={values.code}
+          value={values.coursecode}
         />
         <TextField
           name="credits"
           label="Credits"
           type="number"
-          fullWidth
           required
+          fullWidth
           margin="normal"
           onChange={handleChange}
           value={values.credits}
@@ -93,7 +84,6 @@ const DialogForm = ({ open, onClose, onSuccess }) => {
         <TextField
           name="description"
           label="Description"
-          
           fullWidth
           multiline
           rows={3}
@@ -102,13 +92,12 @@ const DialogForm = ({ open, onClose, onSuccess }) => {
           value={values.description}
         />
         <TextField
-          name="imageUrl"
+          name="image"
           label="Image URL"
-          type="text"
           fullWidth
           margin="normal"
           onChange={handleChange}
-          value={values.imageUrl}
+          value={values.image}
         />
         <Button
           variant="contained"
