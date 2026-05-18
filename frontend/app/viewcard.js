@@ -48,7 +48,7 @@ const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
       const token = localStorage.getItem("jwtToken");
       console.log("Updating course with values:", values); // Log values being sent
       const response = await axios.put(
-        `http://localhost:5000/courses/${course.id}`,
+        `https://course-helper-woad.vercel.app/courses/${course.id}`,
         values,
         {
           headers: {
