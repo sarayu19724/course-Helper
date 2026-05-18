@@ -27,7 +27,7 @@ export default function Home() {
 
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/courses');
+        const response = await axios.get('https://course-helper-woad.vercel.app/courses');
         setCourses(response.data || []);
       } catch (error) {
         console.error("Error fetching courses:", error);
