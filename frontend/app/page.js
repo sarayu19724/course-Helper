@@ -70,7 +70,7 @@ export default function Home() {
   };
 
   const handleAddCourseSuccess = async () => {
-    const response = await axios.get('http://localhost:5000/courses');
+    const response = await axios.get('${process.env.NEXT_PUBLIC_API_URL}/courses');
     setCourses(response.data || []);
   };
 
