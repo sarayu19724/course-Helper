@@ -31,7 +31,7 @@ const DialogForm = ({ open, onClose, onSuccess }) => {
     try {
       const token = localStorage.getItem("jwtToken");
       const response = await axios.post(
-        "http://localhost:5000/courses",
+        "${process.env.NEXT_PUBLIC_API_URL}/courses",
         values,
         {
           headers: {
