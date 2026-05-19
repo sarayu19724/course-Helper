@@ -9,7 +9,7 @@ const authRoutes = require('./routes/authroutes');
 const coursesRoutes = require("./routes/courseroute");
 
 app.use(cors({
-  origin: '${process.env.ALLOWED_ORIGIN}',
+  origin: 'process.env.ALLOWED_ORIGIN',
   credentials: true
 }));
 app.use(bodyParser.json());
