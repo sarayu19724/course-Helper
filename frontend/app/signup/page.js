@@ -35,7 +35,7 @@ export default function SignUp() {
 
         try {
             // Call the signup API
-            const response = await axios.post("http://localhost:5000/auth/register", userDetails);
+            const response = await axios.post("${process.env.NEXT_PUBLIC_API_URL}/auth/register", userDetails);
 
             if (response) {
                 alert("Signup successful! Redirecting to login...");
