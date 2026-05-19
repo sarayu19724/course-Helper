@@ -11,7 +11,6 @@ import Grid from "@mui/material/Grid";
 import Viewcard from "./viewcard";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Home() {
   const [courses, setCourses] = useState([]);
@@ -28,7 +27,7 @@ export default function Home() {
 
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('${API_URL}/courses');
+        const response = await axios.get('http://localhost:5000/courses');
         setCourses(response.data || []);
       } catch (error) {
         console.error("Error fetching courses:", error);

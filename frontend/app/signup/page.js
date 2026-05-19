@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function SignUp() {
     const images = [
         "url('https://c.wallhere.com/photos/18/38/background_solid_bright-1073142.jpg!d')",
@@ -35,7 +35,7 @@ export default function SignUp() {
 
         try {
             // Call the signup API
-            const response = await axios.post("${API_URL}/auth/register", userDetails);
+            const response = await axios.post("http://localhost:5000/auth/register", userDetails);
 
             if (response) {
                 alert("Signup successful! Redirecting to login...");

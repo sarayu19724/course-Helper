@@ -6,7 +6,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const DialogForm = ({ open, onClose, onSuccess }) => {
   const [values, setValues] = useState({
     coursename: '',
@@ -31,7 +31,7 @@ const DialogForm = ({ open, onClose, onSuccess }) => {
     try {
       const token = localStorage.getItem("jwtToken");
       const response = await axios.post(
-        "${API_URL}/courses",
+        "http://localhost:5000/courses",
         values,
         {
           headers: {
