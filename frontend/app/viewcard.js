@@ -68,7 +68,7 @@ const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem("jwtToken");
-      await axios.delete(`http://localhost:5000/courses/${course.id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/courses/${course.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
