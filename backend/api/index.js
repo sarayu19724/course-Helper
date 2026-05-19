@@ -9,7 +9,15 @@ const authRoutes = require('./routes/authroutes');
 const coursesRoutes = require("./routes/courseroute");
 
 app.use(cors({
-  origin: 'https://course-helper-qcuh.vercel.app',
+  origin: function(origin, callback) {
+    if (!origin || 
+        origin.includes('course-helper-qcuh') || 
+        origin.includes('localhost')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(bodyParser.json());
