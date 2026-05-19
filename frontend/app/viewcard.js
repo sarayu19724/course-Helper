@@ -21,11 +21,11 @@ const Viewcard = ({ open, course, onUpdate, onDelete, onClose }) => {
   useEffect(() => {
     if (course) {
       setValues({
-        name: course.coursename,
-        code: course.coursecode,
-        credits: course.credits,
-        description: course.description,
-        imageUrl: course.image,
+        name: course.coursename || '',
+        code: course.coursecode || '',
+        credits: course.credits || '',
+        description: course.description || '',
+        imageUrl: course.image || '',
       });
     }
   }, [course]);

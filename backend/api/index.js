@@ -4,12 +4,14 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-require("dotenv").config({ path: path.join(__dirname, '../../.env') }); // ← fixed path
-
+require("dotenv").config({ path: path.join(__dirname, '../.env') });
 const authRoutes = require('./routes/authroutes');
 const coursesRoutes = require("./routes/courseroute");
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000; // ← fixed env var name
