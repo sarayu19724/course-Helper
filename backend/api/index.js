@@ -9,7 +9,7 @@ const authRoutes = require('./routes/authroutes');
 const coursesRoutes = require("./routes/courseroute");
 
 app.use(cors({
-  origin: 'process.env.ALLOWED_ORIGIN',
+  origin: 'https://course-helper-qcuh.vercel.app',
   credentials: true
 }));
 app.use(bodyParser.json());
