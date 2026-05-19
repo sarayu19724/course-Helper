@@ -36,7 +36,7 @@ export default function Login() {
 
         try {
             // Make an API call to the login endpoint
-            const response = await axios.post("http://localhost:5000/auth/login", loginDetails);
+            const response = await axios.post("${process.env.NEXT_PUBLIC_API_URL}/auth/login", loginDetails);
 
             if (response.status === 200) {
                 const { token } = response.data;
