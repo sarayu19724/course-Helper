@@ -1,4 +1,5 @@
 'use client';
+
 import { useState, useEffect } from "react";
 import React from "react";
 import MyCard from './card';
@@ -20,14 +21,17 @@ export default function Home() {
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
-    if (token) setIsLoggedIn(true);
+    if (token) {
+      setIsLoggedIn(true);
+    }
 
     const fetchCourses = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/courses`);
+        const response = await axios.get('${process.env.NEXT_PUBLIC_API_URL}/courses');
         setCourses(response.data || []);
       } catch (error) {
         console.error("Error fetching courses:", error);
+        alert("Failed to fetch courses. Please try again.");
       }
     };
     fetchCourses();
@@ -66,7 +70,7 @@ export default function Home() {
   };
 
   const handleAddCourseSuccess = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/courses`);
+    const response = await axios.get('http://localhost:5000/courses');
     setCourses(response.data || []);
   };
 
@@ -81,6 +85,7 @@ export default function Home() {
             </Grid>
           ))}
         </Grid>
+
         <Button
           sx={{ position: 'fixed', bottom: 30, right: 30 }}
           variant="contained"
@@ -88,6 +93,7 @@ export default function Home() {
         >
           Add Course
         </Button>
+
         <DialogForm open={open} onClose={handleClose} onSuccess={handleAddCourseSuccess} />
         {selectedCourse && (
           <Viewcard
