@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from "react";
 import React from "react";
 import MyCard from './card';
@@ -21,27 +20,19 @@ export default function Home() {
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
-    if (token) {
-      setIsLoggedIn(true);
-    }
+    if (token) setIsLoggedIn(true);
 
-   useEffect(() => {
-  const token = localStorage.getItem("jwtToken");
-  if (token) setIsLoggedIn(true);
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/courses`);
+        setCourses(response.data || []);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+    fetchCourses();
+  }, []);
 
-  const fetchCourses = async () => {
-    try {
-      // Wake up backend first
-      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/`);
-      
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/courses`);
-      setCourses(response.data || []);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
-    }
-  };
-  fetchCourses();
-}, []);
   const handleClickOpen = () => {
     if (!isLoggedIn) {
       alert("Please login to add a course.");
@@ -75,7 +66,7 @@ export default function Home() {
   };
 
   const handleAddCourseSuccess = async () => {
-    const response = await axios.get('${process.env.NEXT_PUBLIC_API_URL}/courses');
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/courses`);
     setCourses(response.data || []);
   };
 
@@ -90,7 +81,6 @@ export default function Home() {
             </Grid>
           ))}
         </Grid>
-
         <Button
           sx={{ position: 'fixed', bottom: 30, right: 30 }}
           variant="contained"
@@ -98,7 +88,6 @@ export default function Home() {
         >
           Add Course
         </Button>
-
         <DialogForm open={open} onClose={handleClose} onSuccess={handleAddCourseSuccess} />
         {selectedCourse && (
           <Viewcard
