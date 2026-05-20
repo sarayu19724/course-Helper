@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-require("dotenv").config({ path: path.join(__dirname, '../.env') });
+require("dotenv").config(); 
 const authRoutes = require('./routes/authroutes');
 const coursesRoutes = require("./routes/courseroute");
 
