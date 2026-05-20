@@ -25,18 +25,23 @@ export default function Home() {
       setIsLoggedIn(true);
     }
 
-    const fetchCourses = async () => {
-      try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/courses`);
-        setCourses(response.data || []);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-        alert("Failed to fetch courses. Please try again.");
-      }
-    };
-    fetchCourses();
-  }, []);
+   useEffect(() => {
+  const token = localStorage.getItem("jwtToken");
+  if (token) setIsLoggedIn(true);
 
+  const fetchCourses = async () => {
+    try {
+      // Wake up backend first
+      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/`);
+      
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/courses`);
+      setCourses(response.data || []);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
+  fetchCourses();
+}, []);
   const handleClickOpen = () => {
     if (!isLoggedIn) {
       alert("Please login to add a course.");
